@@ -13,25 +13,26 @@ const User = sequelize.define('User', {
       allowNull: false
     },
     age: {
-      type: DataTypes.INTEGER
+      type: DataTypes.INTEGER,
+      allowNull: false
     }
 });
 
-const userTable = (values) => {
+const userTable = async (values) => {
 
-    console.log(values);
-
-
-    User.sync({force:true})
-    .then((res) => {
-        console.log(res);
-        values.map((value) => {
-            User.create({userName: value.name, age: value.age});
-        })
+    const t = await sequelize.transaction()
+    await User.sync({force:true})
+    await values.map(async (value) => {
+        try{
+            console.log("TRYY");
+            await User.create({userName: value.name, age: value.age})
+        }catch(error){
+            console.log("ERROR");
+            await t.rollback();
+        }
     })
-    .catch((e) => {
-        console.log("Error While Adding values into the table", e);
-    })
+    // await t.commit();
+    console.log(t);
 }
 
 export { User, userTable};

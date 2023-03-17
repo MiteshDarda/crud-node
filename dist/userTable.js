@@ -18,22 +18,26 @@ const User = sequelize_1.default.define('User', {
         allowNull: false
     },
     age: {
-        type: Sequelize_1.DataTypes.INTEGER
+        type: Sequelize_1.DataTypes.INTEGER,
+        allowNull: false
     }
 });
 exports.User = User;
-const userTable = (values) => {
-    console.log(values);
-    User.sync({ force: true })
-        .then((res) => {
-        console.log(res);
-        values.map((value) => {
-            User.create({ userName: value.name, age: value.age });
-        });
-    })
-        .catch((e) => {
-        console.log("Error While Adding values into the table", e);
+const userTable = async (values) => {
+    const t = await sequelize_1.default.transaction();
+    await User.sync({ force: true });
+    await values.map(async (value) => {
+        try {
+            console.log("TRYY");
+            await User.create({ userName: value.name, age: value.age });
+        }
+        catch (error) {
+            console.log("ERROR");
+            await t.rollback();
+        }
     });
+    // await t.commit();
+    console.log(t);
 };
 exports.userTable = userTable;
 //# sourceMappingURL=userTable.js.map

@@ -10,7 +10,7 @@ const deleteUser_1 = __importDefault(require("./deleteUser"));
 const port = 3000;
 const app = (0, express_1.default)();
 app.use(express_1.default.json()); // middleware to Pars data and get Body
-sequelize_1.default; // initialize database
+sequelize_1.default; // Connect To Database
 // API Calls
 app.get('', (req, res) => {
     res.send("Hello");
@@ -20,16 +20,16 @@ app.post('/addUser', (req, res) => {
     res.send("Send data in the form of array EXAMPLE : [ { name: 'rohan', age: '32' } ]");
 });
 app.post('/deleteUser', (req, res) => {
-    // console.log(req.body);
     (0, deleteUser_1.default)(req.body);
     res.send("Send Only name of the user PLEASE");
 });
 app.listen(port, () => {
     console.log(`http://localhost:${port}`);
 });
+//same data for addUser API
 // [
 //     {
-//         "name": "rohan",
+//         "name": "Rohan",
 //         "age": "32"
 //     },
 //     {
@@ -39,6 +39,10 @@ app.listen(port, () => {
 //     {
 //         "name": "Eren",
 //         "age": "17"
+//     }
+//     {
+//         "name": "Golu",
+//         "age": "65"
 //     }
 // ]
 //# sourceMappingURL=index.js.map
