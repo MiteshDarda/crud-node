@@ -29,19 +29,19 @@ app.listen(port, () => {
 //same data for addUser API
 // [
 //     {
-//         "name": "Rohan",
+//         "userName": "Rohan",
 //         "age": "32"
 //     },
 //     {
-//         "name": "Angel",
+//         "userName": "Angel",
 //         "age": "19"
 //     },
 //     {
-//         "name": "Eren",
-//         "age": "17"
-//     }
+//         "userName": "Eren",
+//         "age": "22"
+//     },
 //     {
-//         "name": "Golu",
+//         "userName": "Golu",
 //         "age": "65"
 //     }
 // ]

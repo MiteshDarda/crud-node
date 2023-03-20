@@ -1,10 +1,10 @@
 import sequelize from "./sequelize";
 import { User } from "./userTable";
 
-function deleteUser(value) {
+const deleteUser = async (value) => {
 
     try{
-        User.destroy({
+        await User.destroy({
             where:{ id : value.id}
         })
     }
