@@ -3,15 +3,14 @@ import { User } from "./userTable";
 
 function deleteUser(value) {
 
-    User.destroy({
-        where:{ id : value.id}
-    })
-    .then(() => {
-        console.log("Deleted");
-    })
-    .catch((e) => {
-        console.log("error Occored while deleting with data", value, e)
-    })
+    try{
+        User.destroy({
+            where:{ id : value.id}
+        })
+    }
+    catch(error){
+        console.log("UNABLE TO DELETE USER");
+    }
 
 }
 
