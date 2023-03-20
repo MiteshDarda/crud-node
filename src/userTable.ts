@@ -20,19 +20,27 @@ const User = sequelize.define('User', {
 
 const userTable = async (values) => {
 
+    let p = new Array;
     const t = await sequelize.transaction()
     await User.sync({force:true})
-    await values.map(async (value) => {
+    for await(const value of values){
         try{
-            console.log("TRYY");
-            await User.create({userName: value.name, age: value.age})
-        }catch(error){
-            console.log("ERROR");
-            await t.rollback();
+            p.push(await User.create({userName: value.name, age: value.age}));
         }
+        catch{
+            p.push(Promise.reject());
+            break;
+        }
+    }
+    
+    Promise.all(p)
+    .then( res => {
+        console.log("INSIDE THEN", res, p);
     })
-    // await t.commit();
-    console.log(t);
+    .catch (err => {
+        console.log("INSIDE CATCH");
+        t.rollback();
+    });
 }
 
 export { User, userTable};
