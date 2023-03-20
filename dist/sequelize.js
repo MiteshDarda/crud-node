@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const sequelize_1 = require("sequelize");
 // Database
-const sequelize = new sequelize_1.Sequelize('postgres', 'postgres', '12345678', {
+const sequelize = new sequelize_1.Sequelize('postgres', 'postgres', `${process.env.PASSWORD}`, {
     host: 'localhost',
     dialect: 'postgres'
 });

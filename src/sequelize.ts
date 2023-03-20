@@ -2,7 +2,7 @@ import {Sequelize} from "sequelize";
 
 // Database
 
-const sequelize = new Sequelize('postgres', 'postgres', '12345678', {
+const sequelize = new Sequelize(`${process.env.DATABASE}`, `${process.env.USER_NAME}`, `${process.env.PASSWORD}`, {
     host: 'localhost',
     dialect: 'postgres' 
 });
