@@ -28,7 +28,7 @@ const userTable = async (values) => {
     const t = await sequelize_1.default.transaction();
     await User.sync({ force: true });
     try {
-        const users = await User.bulkCreate([...values]);
+        const users = await User.bulkCreate(values);
     }
     catch (error) {
         console.log("ERROR CANNOT CREATE NEW USERS, INCOMPLETE DATA");

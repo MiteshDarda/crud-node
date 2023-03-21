@@ -5,7 +5,8 @@ const deleteUser = async (value) => {
 
     try{
         await User.destroy({
-            where:{ id : value.id}
+            // where:{ id : value.id}
+            where: value // as value = {id: 'NUM'}
         })
     }
     catch(error){
